@@ -150,7 +150,7 @@ h2 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: c
 .tab:hover { color: var(--fg); }
 .tab[aria-pressed="true"] { background: var(--blue); color: #fff; }
 .projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.project { display: flex; flex-direction: column; overflow: hidden; }
+.project { position: relative; display: flex; flex-direction: column; overflow: hidden; cursor: pointer; }
 .project.wide { grid-column: span 2; }
 .project.hide { display: none; }
 .project.pop { animation: pop .45s var(--ease); }
@@ -185,6 +185,9 @@ h2 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: c
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { font: 500 12px var(--font-mono); color: #b9c6e0; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 7px; padding: 3px 9px; }
 .p-foot { margin-top: auto; padding-top: 6px; }
+/* o link "Ver no GitHub" cobre o card inteiro, incluindo a imagem */
+.p-foot .btn::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+.project:hover .p-foot .btn { border-color: var(--blue); background: var(--blue-soft); }
 
 /* certificações */
 .cert-sum { display: flex; flex-wrap: wrap; gap: 10px; }
