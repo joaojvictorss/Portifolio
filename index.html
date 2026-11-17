@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>João Victor · Portfólio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfólio de João Victor Silva dos Santos: estudante de Engenharia de Software com foco em Dados (SQL, Python, Power BI).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: tema escuro único. Hero em 2 colunas (texto + janela de código animada), seções em grade com cards de borda discreta, destaque em azul. */
+:root {
+  --bg: #050608;
+  --bg-2: #0a0c11;
+  --card: #0c0f15;
+  --card-hover: #10141c;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --fg: #f2f5fa;
+  --muted: #8b94a7;
+  --blue: #2f6bff;
+  --blue-2: #4cc2ff;
+  --blue-soft: rgba(47, 107, 255, 0.12);
+  --blue-glow: rgba(47, 107, 255, 0.35);
+  --ok: #3ddc97;
+  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --radius: 16px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
+a { color: inherit; }
+img { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--blue-2); outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--blue); color: #fff; }
+
+.container { max-width: 1160px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+/* fundo: grade + brilho */
+.bg-fx { position: absolute; inset: 0 0 auto; height: 900px; pointer-events: none; z-index: 0; overflow: hidden; }
+.bg-fx::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%); opacity: .55; }
+.bg-fx::after { content: ""; position: absolute; width: 720px; height: 720px; right: -160px; top: -220px; background: radial-gradient(circle, var(--blue-glow), transparent 65%); filter: blur(20px); animation: drift 14s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: translate(-80px, 60px) scale(1.1); } }
+
+/* ---------- nav ---------- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 16px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 17px; }
+.mono { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-weight: 800; font-size: 15px; letter-spacing: -.02em; color: #fff; background: linear-gradient(135deg, var(--blue), var(--blue-2)); box-shadow: 0 6px 24px -6px var(--blue-glow); }
+.menu { display: flex; gap: 4px; }
+.menu a { position: relative; text-decoration: none; color: var(--muted); font-size: 14.5px; font-weight: 500; padding: 8px 14px; border-radius: 10px; transition: color .2s, background .2s; }
+.menu a:hover { color: var(--fg); background: rgba(255,255,255,.04); }
+.menu a.active { color: var(--fg); }
+.menu a.active::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--blue); }
+.btn { display: inline-flex; align-items: center; gap: 9px; font: 600 14.5px var(--font-body); text-decoration: none; padding: 11px 20px; border-radius: 12px; border: 1px solid var(--line-strong); color: var(--fg); background: transparent; cursor: pointer; transition: transform .25s var(--ease), border-color .25s, background .25s, box-shadow .25s; }
+.btn svg { width: 17px; height: 17px; flex: none; }
+.btn:hover { transform: translateY(-2px); border-color: var(--blue); background: var(--blue-soft); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 10px 30px -10px var(--blue-glow); }
+.btn.primary:hover { background: #4079ff; box-shadow: 0 14px 36px -10px var(--blue-glow); }
+.btn.sm { padding: 8px 15px; font-size: 13.5px; border-radius: 10px; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; z-index: 1; padding-block: 64px 96px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.hero-text { display: grid; gap: 24px; min-width: 0; }
+.badge { justify-self: start; display: inline-flex; align-items: center; gap: 9px; font: 500 13px var(--font-mono); color: var(--blue-2); background: var(--blue-soft); border: 1px solid rgba(76,194,255,.2); padding: 7px 14px; border-radius: 999px; }
+.badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 rgba(61,220,151,.6); animation: pulse 2.2s infinite; }
+@keyframes pulse { 70%, 100% { box-shadow: 0 0 0 8px rgba(61,220,151,0); } }
+.hello { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(2.3rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -.035em; }
+.hello .name { display: block; font-weight: 800; font-size: clamp(2.9rem, 7vw, 5rem); background: linear-gradient(100deg, var(--blue) 10%, var(--blue-2) 90%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .06em; }
+.role { margin: 0; font: 500 clamp(1.05rem, 2vw, 1.25rem) var(--font-mono); color: var(--fg); min-height: 1.6em; }
+.role .pre { color: var(--muted); }
+.role .typed { color: var(--blue-2); }
+.caret { display: inline-block; width: 2px; height: 1.1em; background: var(--blue-2); vertical-align: -0.15em; margin-left: 3px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.lead { margin: 0; max-width: 54ch; font-size: 1.08rem; color: var(--muted); }
+.lead strong { color: var(--fg); font-weight: 600; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.socials { display: flex; gap: 10px; }
+.icon-btn { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; border: 1px solid var(--line); color: var(--muted); transition: color .2s, border-color .2s, transform .25s var(--ease), background .2s; text-decoration: none; background: var(--bg-2); cursor: pointer; }
+.icon-btn svg { width: 19px; height: 19px; }
+.icon-btn:hover { color: var(--fg); border-color: var(--blue); transform: translateY(-2px); background: var(--blue-soft); }
+
+/* janela de código */
+.window-wrap { position: relative; min-width: 0; }
+.window-wrap::before { content: ""; position: absolute; inset: 10% 5% -6% 5%; background: radial-gradient(ellipse at center, var(--blue-glow), transparent 70%); filter: blur(40px); z-index: -1; }
+.window { background: linear-gradient(180deg, #0d1118, #090b10); border: 1px solid var(--line-strong); border-radius: 18px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); transform: perspective(1400px) rotateY(-7deg) rotateX(3deg); transition: transform .6s var(--ease); }
+.window-wrap:hover .window { transform: perspective(1400px) rotateY(0) rotateX(0); }
+.win-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.win-bar i { width: 11px; height: 11px; border-radius: 50%; background: #262b36; display: block; }
+.win-bar span { margin-left: 10px; font: 12.5px var(--font-mono); color: var(--muted); }
+.win-tabs { margin-left: auto; font: 11.5px var(--font-mono); color: var(--blue-2); background: var(--blue-soft); padding: 2px 9px; border-radius: 6px; }
+.code { margin: 0; padding: 20px 20px 8px; font: 13.5px/1.75 var(--font-mono); color: #c9d4e8; white-space: pre; overflow-x: auto; min-height: 190px; }
+.k { color: #6ea8ff; } .s { color: #7fe0b5; } .f { color: #c7a6ff; } .n { color: #ffcb6b; } .c { color: #566179; }
+.result { margin: 0 20px 20px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.result table { width: 100%; border-collapse: collapse; font: 12.5px var(--font-mono); font-variant-numeric: tabular-nums; }
+.result th, .result td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.result th { color: var(--muted); font-weight: 500; background: rgba(255,255,255,.02); }
+.result tr:last-child td { border-bottom: 0; }
+.result td:last-child, .result th:last-child { text-align: right; }
+.result td .barcell { display: inline-block; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--blue-2)); vertical-align: middle; margin-right: 8px; transition: width .8s var(--ease); }
+.result-meta { font: 11.5px var(--font-mono); color: var(--muted); padding: 0 20px 16px; display: flex; justify-content: space-between; }
+.float-chip { position: absolute; right: -10px; top: -18px; font: 600 13px var(--font-display); padding: 9px 15px; border-radius: 12px; background: rgba(10,12,17,.85); border: 1px solid rgba(76,194,255,.35); color: var(--blue-2); box-shadow: 0 10px 30px -12px var(--blue-glow); backdrop-filter: blur(8px); animation: float 5s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-8px); } }
+
+/* ---------- seções ---------- */
+.section { position: relative; z-index: 1; padding-block: 80px; display: grid; gap: 36px; }
+.sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.sec-head > div:first-child { display: grid; gap: 8px; }
+.kicker { margin: 0; display: inline-flex; align-items: center; gap: 10px; font: 500 14px var(--font-body); color: var(--blue-2); }
+.kicker::before { content: ""; width: 26px; height: 2px; border-radius: 2px; background: var(--blue); }
+h2 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 3.6vw, 2.5rem); letter-spacing: -.03em; line-height: 1.15; text-wrap: balance; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .3s, background .3s, transform .35s var(--ease), box-shadow .35s; }
+.card:hover { border-color: rgba(47,107,255,.45); background: var(--card-hover); transform: translateY(-4px); box-shadow: 0 24px 50px -30px var(--blue-glow); }
+
+/* sobre */
+.about { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: stretch; }
+.about-text { padding: 32px; display: grid; gap: 16px; align-content: start; }
+.about-text p { margin: 0; color: var(--muted); font-size: 1.04rem; max-width: 62ch; }
+.about-text p strong { color: var(--fg); font-weight: 600; }
+.facts { display: grid; gap: 12px; }
+.fact { display: flex; align-items: center; gap: 16px; padding: 16px 20px; }
+.fact .ico { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 12px; background: var(--blue-soft); color: var(--blue-2); }
+.fact .ico svg { width: 20px; height: 20px; }
+.fact b { display: block; font-weight: 600; font-size: 15px; }
+.fact span { color: var(--muted); font-size: 13.5px; }
+
+/* habilidades */
+.skills { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.skill { padding: 22px 12px 18px; display: grid; justify-items: center; gap: 12px; text-align: center; }
+.skill img { width: 40px; height: 40px; transition: transform .35s var(--ease); }
+.skill:hover img { transform: scale(1.12) rotate(-4deg); }
+.skill img.invert { filter: invert(1); }
+.skill img.invert-soft { filter: brightness(0) invert(1); opacity: .9; }
+.skill b { font-weight: 600; font-size: 14.5px; }
+.skill span { font-size: 12px; color: var(--muted); margin-top: -10px; }
+
+/* projetos */
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); flex-wrap: wrap; }
+.tab { font: 500 14px var(--font-body); color: var(--muted); background: transparent; border: 0; padding: 7px 15px; border-radius: 9px; cursor: pointer; transition: color .2s, background .25s; }
+.tab:hover { color: var(--fg); }
+.tab[aria-pressed="true"] { background: var(--blue); color: #fff; }
+.projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.project { display: flex; flex-direction: column; overflow: hidden; }
+.project.wide { grid-column: span 2; }
+.project.hide { display: none; }
+.project.pop { animation: pop .45s var(--ease); }
+@keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+.shot { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--bg-2); max-width: 100%; }
+.project.wide .shot { aspect-ratio: 21 / 9; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform .7s var(--ease); }
+.project:hover .shot img { transform: scale(1.05); }
+.shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(5,6,8,.55)); pointer-events: none; }
+.shot .label { position: absolute; left: 14px; top: 14px; z-index: 1; font: 500 11.5px var(--font-mono); color: #fff; background: rgba(5,6,8,.7); border: 1px solid var(--line-strong); padding: 4px 10px; border-radius: 8px; backdrop-filter: blur(6px); }
+.shot.code-shot { background: radial-gradient(circle at 80% 0%, rgba(47,107,255,.25), transparent 60%), #080a0f; display: flex; align-items: center; padding: 20px 22px; }
+.shot.code-shot pre { margin: 0; font: 12.5px/1.75 var(--font-mono); color: #c9d4e8; white-space: pre; overflow: hidden; }
+.shot.pix-shot { background: radial-gradient(circle at 30% 20%, rgba(76,194,255,.25), transparent 55%), linear-gradient(140deg, #0a1430, #0d2a7a); display: grid; place-items: center; }
+.phone { width: 150px; padding: 14px; border-radius: 20px; background: #0b0f17; border: 1px solid var(--line-strong); display: grid; gap: 8px; box-shadow: 0 20px 40px -14px rgba(0,0,0,.7); transition: transform .5s var(--ease); }
+.project:hover .phone { transform: translateY(-6px) rotate(-2deg); }
+.phone .t { font: 600 10.5px var(--font-mono); color: var(--muted); }
+.phone .v { font: 700 21px var(--font-display); letter-spacing: -.03em; }
+.phone .ln { height: 7px; border-radius: 4px; background: #1a2130; }
+.phone .ln.s { width: 60%; }
+.phone .al { font: 600 10px var(--font-body); color: #ff8a8a; background: rgba(255,90,90,.12); border: 1px solid rgba(255,90,90,.25); padding: 6px 8px; border-radius: 7px; }
+.phone .ok { font: 600 11px var(--font-body); text-align: center; color: #fff; background: var(--blue); padding: 7px; border-radius: 8px; }
+.p-body { padding: 22px 22px 22px; display: grid; gap: 12px; flex: 1; align-content: start; }
+.p-meta { display: flex; justify-content: space-between; gap: 10px; font: 12px var(--font-mono); color: var(--muted); }
+.p-meta .area { color: var(--blue-2); }
+.project h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -.02em; line-height: 1.25; }
+.project.wide h3 { font-size: 1.5rem; }
+.project p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.stat { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: var(--bg-2); }
+.stat b { display: block; font: 700 1.3rem var(--font-display); letter-spacing: -.02em; color: var(--fg); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 12px var(--font-mono); color: #b9c6e0; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 7px; padding: 3px 9px; }
+.p-foot { margin-top: auto; padding-top: 6px; }
+
+/* certificações */
+.cert-sum { display: flex; flex-wrap: wrap; gap: 10px; }
+.cert-sum span { font: 500 13px var(--font-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; background: var(--bg-2); }
+.cert-sum b { color: var(--blue-2); font-weight: 600; }
+.certs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.cert { padding: 0; display: grid; }
+.cert-link { padding: 20px; display: grid; gap: 14px; align-content: start; height: 100%; text-decoration: none; color: inherit; border-radius: inherit; cursor: pointer; }
+.cert .open { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; font: 600 13px var(--font-body); color: var(--blue-2); }
+.cert .open svg { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+.cert:hover .open svg { transform: translate(2px, -2px); }
+.cert-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.seal { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; color: var(--blue-2); background: radial-gradient(circle at 35% 30%, rgba(76,194,255,.22), rgba(47,107,255,.08)); border: 1px solid rgba(76,194,255,.3); transition: transform .5s var(--ease); }
+.seal svg { width: 22px; height: 22px; }
+.cert:hover .seal { transform: rotate(-12deg) scale(1.06); }
+.level { font: 500 11px var(--font-mono); letter-spacing: .02em; color: var(--blue-2); background: var(--blue-soft); padding: 3px 9px; border-radius: 6px; white-space: nowrap; }
+.level.course { color: var(--muted); background: rgba(255,255,255,.05); }
+.cert h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1rem; line-height: 1.35; letter-spacing: -.01em; }
+.cert-meta { display: grid; gap: 2px; font-size: 13px; color: var(--muted); margin-top: auto; }
+.cert-meta .valid { color: var(--ok); font-size: 12px; }
+
+/* contato */
+.contact { position: relative; overflow: hidden; padding: 48px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px; align-items: center; }
+.contact::before { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; bottom: -280px; background: radial-gradient(circle, var(--blue-glow), transparent 65%); pointer-events: none; }
+.contact:hover { transform: none; }
+.contact > * { position: relative; }
+.contact-text { display: grid; gap: 14px; min-width: 0; }
+.contact-text p { margin: 0; color: var(--muted); font-size: 1.05rem; max-width: 50ch; }
+.mail-box { display: grid; gap: 12px; min-width: 0; }
+.mail { font: 500 clamp(.95rem, 2vw, 1.1rem) var(--font-mono); padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--bg); user-select: all; overflow-wrap: anywhere; }
+.mail-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+footer { position: relative; z-index: 1; border-top: 1px solid var(--line); margin-top: 40px; }
+footer .container { padding-block: 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); }
+.top-btn { position: fixed; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 40; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity .3s, transform .3s var(--ease), border-color .2s, background .2s; }
+.top-btn.show { opacity: 1; pointer-events: auto; transform: none; }
+
+/* entrada */
+.enter { animation: up .8s var(--ease) both; }
+.d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; } .d6 { animation-delay: .3s; }
+@keyframes up { from { opacity: 0; transform: translateY(18px); } }
+.reveal.in { animation: up .8s var(--ease) both; }
+
+@media (max-width: 980px) {
+  .menu { display: none; }
+  .hero { grid-template-columns: 1fr; gap: 48px; padding-block: 40px 64px; }
+  .window { transform: none; }
+  .about { grid-template-columns: 1fr; }
+  .skills { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .certs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact { grid-template-columns: 1fr; padding: 32px; }
+}
+@media (max-width: 640px) {
+  .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projects { grid-template-columns: 1fr; }
+  .certs { grid-template-columns: 1fr; }
+  .project.wide { grid-column: auto; }
+  .project.wide .shot { aspect-ratio: 16 / 9; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .section { padding-block: 56px; }
+  .float-chip { right: 8px; }
+  .about-text { padding: 24px; }
+  .contact { padding: 24px; }
+  .nav .gh-label { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<div class="bg-fx" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="container">
+    <a class="brand" href="#inicio"><span class="mono">JV</span>João Victor</a>
+    <nav class="menu" aria-label="Seções">
+      <a href="#inicio" class="active">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#certificacoes">Certificações</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn sm" href="https://github.com/joaojvictorss" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+      <span class="gh-label">GitHub</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="container hero" id="inicio">
+    <div class="hero-text">
+      <span class="badge enter d1"><span class="dot"></span>Disponível para estágio</span>
+      <h1 class="hello enter d2">Olá, eu sou <span class="name">João Victor</span></h1>
+      <p class="role enter d3"><span class="pre">&gt; </span><span class="typed" id="typed">Análise de Dados</span><span class="caret" aria-hidden="true"></span></p>
+      <p class="lead enter d4">Estudante de Engenharia de Software com foco em <strong>Dados</strong>. Transformo bases brutas em respostas de negócio com SQL, Python e Power BI. Também estou aberto a <strong>estágios em outras áreas</strong> de tecnologia.</p>
+      <div class="cta enter d5">
+        <a class="btn primary" href="#projetos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>
+          Ver meus projetos
+        </a>
+        <a class="btn" href="#contato">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          Entrar em contato
+        </a>
+      </div>
+      <div class="socials enter d5">
+        <a class="icon-btn" href="https://github.com/joaojvictorss" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.770 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.050.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/jo%C3%A3o-victor-silva-dos-santos/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
+        <a class="icon-btn" href="#contato" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="window-wrap enter d6">
+      <span class="float-chip">Query. Analisa. Decide.</span>
+      <div class="window" aria-label="Exemplo de consulta SQL do projeto de vendas">
+        <div class="win-bar"><i></i><i></i><i></i><span>analise_vendas.sql</span><span class="win-tabs">MySQL</span></div>
+<pre class="code" id="code"><span class="c">-- faturamento por categoria</span>
+<span class="k">SELECT</span> category,
+       <span class="f">ROUND</span>(<span class="f">SUM</span>(sales), <span class="n">2</span>) <span class="k">AS</span> faturamento
+<span class="k">FROM</span> superstore_sales
+<span class="k">GROUP BY</span> category
+<span class="k">ORDER BY</span> faturamento <span class="k">DESC</span>;</pre>
+        <div class="result">
+          <table>
+            <thead><tr><th>category</th><th>faturamento</th></tr></thead>
+            <tbody id="rows">
+              <tr><td><span class="barcell" style="width:72px"></span>Technology</td><td>827.455,87</td></tr>
+              <tr><td><span class="barcell" style="width:63px"></span>Furniture</td><td>728.658,58</td></tr>
+              <tr><td><span class="barcell" style="width:61px"></span>Office Supplies</td><td>705.422,33</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="result-meta"><span id="status">3 linhas retornadas</span><span>0,012 s</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section" id="sobre" aria-labelledby="h-sobre">
+    <div class="sec-head reveal"><div><p class="kicker">Sobre mim</p><h2 id="h-sobre">Quem sou eu?</h2></div></div>
+    <div class="about">
+      <div class="card about-text reveal">
+        <p>Sou estudante de <strong>Engenharia de Software</strong> em São Paulo. Meu foco é <strong>análise de dados</strong>: partir de uma pergunta de negócio, limpar a base, modelar e entregar um painel que ajude alguém a decidir.</p>
+        <p>A base de desenvolvimento da faculdade (Java, Spring Boot, web) me ajuda a entender de onde os dados vêm. Aprendo rápido, gosto de resolver problemas e trabalho bem em equipe.</p>
+        <p>Procuro um <strong>estágio em Dados</strong>, mas também topo outras áreas de tecnologia onde eu possa aprender e entregar.</p>
+      </div>
+      <div class="facts">
+        <div class="card fact reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5-10 5 10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><div><b>Engenharia de Software</b><span>Graduação em andamento</span></div></div>
+        <div class="card fact reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="5"/><rect x="12" y="8" width="3" height="9"/><rect x="17" y="5" width="3" height="12"/></svg></span><div><b>Foco em Dados e BI</b><span>SQL, Python, Power BI</span></div></div>
+        <div class="card fact reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></span><div><b>Aprendizado contínuo</b><span>7 certificações Oracle e 5 projetos no GitHub</span></div></div>
+        <div class="card fact reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><b>São Paulo, SP</b><span>Disponível para estágio</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section" id="habilidades" aria-labelledby="h-skills">
+    <div class="sec-head reveal"><div><p class="kicker">Minhas habilidades</p><h2 id="h-skills">Tecnologias que eu uso</h2></div></div>
+    <div class="skills">
+      <div class="card skill reveal"><img src="icons/powerbi.svg" alt="" width="40" height="40"><b>Power BI</b><span>DAX · Power Query</span></div>
+      <div class="card skill reveal"><img src="icons/mysql-original.svg" alt="" width="40" height="40"><b>SQL</b><span>MySQL</span></div>
+      <div class="card skill reveal"><img src="icons/python-original.svg" alt="" width="40" height="40"><b>Python</b><span>scripts e ETL</span></div>
+      <div class="card skill reveal"><img src="icons/pandas-original.svg" alt="" width="40" height="40" class="invert-soft"><b>Pandas</b><span>limpeza de dados</span></div>
+      <div class="card skill reveal"><img src="icons/excel.svg" alt="" width="40" height="40"><b>Excel</b><span>fórmulas e gráficos</span></div>
+      <div class="card skill reveal"><img src="icons/java-original.svg" alt="" width="40" height="40"><b>Java</b><span>orientação a objetos</span></div>
+      <div class="card skill reveal"><img src="icons/spring-original.svg" alt="" width="40" height="40"><b>Spring Boot</b><span>APIs web</span></div>
+      <div class="card skill reveal"><img src="icons/git-original.svg" alt="" width="40" height="40"><b>Git</b><span>versionamento</span></div>
+      <div class="card skill reveal"><img src="icons/github-original.svg" alt="" width="40" height="40" class="invert"><b>GitHub</b><span>portfólio</span></div>
+      <div class="card skill reveal"><img src="icons/vscode-original.svg" alt="" width="40" height="40"><b>VS Code</b><span>editor</span></div>
+    </div>
+  </section>
+
+  <section class="container section" id="projetos" aria-labelledby="h-proj">
+    <div class="sec-head reveal">
+      <div><p class="kicker">Meus projetos</p><h2 id="h-proj">Confira o que eu construí</h2></div>
+      <div class="tabs" role="group" aria-label="Filtrar projetos">
+        <button class="tab" type="button" data-f="todos" aria-pressed="true">Todos</button>
+        <button class="tab" type="button" data-f="dados" aria-pressed="false">Dados &amp; BI</button>
+        <button class="tab" type="button" data-f="dev" aria-pressed="false">Desenvolvimento</button>
+      </div>
+    </div>
+
+    <ul class="projects" id="projects">
+      <li class="card project wide reveal" data-area="dados">
+        <div class="shot"><span class="label">Destaque</span><img src="img/financas.png" alt="Dashboard de finanças pessoais no Power BI" width="2175" height="1448"></div>
+        <div class="p-body">
+          <div class="p-meta"><span class="area">Dados &amp; BI</span><span>out 2026</span></div>
+          <h3>Controle Financeiro Pessoal</h3>
+          <p>Orçamento x realizado em 12 meses de dados simulados: geração em Python, planilha em Excel com alertas de estouro e dashboard de 2 páginas no Power BI com modelo em estrela e medidas DAX.</p>
+          <div class="stats">
+            <div class="stat"><b>21,65%</b><span>taxa de poupança</span></div>
+            <div class="stat"><b>132%</b><span>orçamento de Alimentação</span></div>
+            <div class="stat"><b>481</b><span>lançamentos analisados</span></div>
+          </div>
+          <div class="chips"><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">Power Query</span><span class="chip">Excel</span><span class="chip">Python</span></div>
+          <div class="p-foot"><a class="btn sm" href="https://github.com/joaojvictorss/projeto-financas-pessoais" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.690-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>Ver no GitHub</a></div>
+        </div>
+      </li>
+
+      <li class="card project reveal" data-area="dados">
+        <div class="shot"><img src="img/vendas.png" alt="Dashboard de vendas Superstore no Power BI" width="1415" height="785" loading="lazy"></div>
+        <div class="p-body">
+          <div class="p-meta"><span class="area">Dados &amp; BI</span><span>set 2026</span></div>
+          <h3>Dashboard de Vendas</h3>
+          <p>Faturamento, pedidos únicos e vendas por categoria de um varejo, com tratamento de dados em SQL.</p>
+          <div class="chips"><span class="chip">Power BI</span><span class="chip">MySQL</span><span class="chip">SQL</span></div>
+          <div class="p-foot"><a class="btn sm gh" href="https://github.com/joaojvictorss/projeto-de-analise-vendas-powerbi" target="_blank" rel="noopener">Ver no GitHub</a></div>
+        </div>
+      </li>
+
+      <li class="card project reveal" data-area="dados">
+        <div class="shot"><img src="img/logistica.png" alt="Dashboard de logística no Power BI" width="1723" height="797" loading="lazy"></div>
+        <div class="p-body">
+          <div class="p-meta"><span class="area">Dados &amp; BI</span><span>set 2026</span></div>
+          <h3>Dashboard de Logística</h3>
+          <p>Lead time médio, faturamento por modo de envio e gargalos de entrega por região.</p>
+          <div class="chips"><span class="chip">Power BI</span><span class="chip">MySQL</span><span class="chip">DAX</span></div>
+          <div class="p-foot"><a class="btn sm gh" href="https://github.com/joaojvictorss/logistica-PowerBi" target="_blank" rel="noopener">Ver no GitHub</a></div>
+        </div>
+      </li>
+
+      <li class="card project reveal" data-area="dados">
+        <div class="shot code-shot" aria-hidden="true"><pre><span class="c"># pipeline_etl.py</span>
+df = pd.<span class="f">read_csv</span>(<span class="s">"dados_brutos.csv"</span>)
+df = df.<span class="f">drop_duplicates</span>()
+df[<span class="s">"valor"</span>] = pd.<span class="f">to_numeric</span>(
+    df[<span class="s">"valor"</span>], errors=<span class="s">"coerce"</span>)
+df.<span class="f">to_excel</span>(<span class="s">"Relatorio_tratado.xlsx"</span>)</pre></div>
+        <div class="p-body">
+          <div class="p-meta"><span class="area">Dados · Python</span><span>set 2026</span></div>
+          <h3>Pipeline ETL de Vendas</h3>
+          <p>Extrai uma base em CSV, remove duplicatas, trata nulos e tipos, classifica o ticket e exporta para CSV e Excel.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">ETL</span></div>
+          <div class="p-foot"><a class="btn sm gh" href="https://github.com/joaojvictorss/pipeline-etl-python" target="_blank" rel="noopener">Ver no GitHub</a></div>
+        </div>
+      </li>
+
+      <li class="card project reveal" data-area="dev">
+        <div class="shot pix-shot" aria-hidden="true">
+          <div class="phone"><span class="t">Pix · transferir</span><span class="v">R$ 250,00</span><span class="ln"></span><span class="ln s"></span><span class="al">Chave marcada como suspeita</span><span class="ok">Confirmar</span></div>
+        </div>
+        <div class="p-body">
+          <div class="p-meta"><span class="area">Desenvolvimento</span><span>jun 2025</span></div>
+          <h3>Sistema Bancário com Pix</h3>
+          <p>App web com login, múltiplos usuários e Pix com validação de saldo e bloqueio de chaves suspeitas.</p>
+          <div class="chips"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">JavaScript</span><span class="chip">MySQL</span></div>
+          <div class="p-foot"><a class="btn sm gh" href="https://github.com/joaojvictorss/Projeto-A3" target="_blank" rel="noopener">Ver no GitHub</a></div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container section" id="certificacoes" aria-labelledby="h-cert">
+    <div class="sec-head reveal">
+      <div><p class="kicker">Certificações</p><h2 id="h-cert">Certificados e cursos</h2></div>
+      <div class="cert-sum"><span><b>7</b> certificações Oracle</span><span><b>1</b> curso Oracle Academy</span></div>
+    </div>
+    <ul class="certs">
+      <li class="card cert reveal"><a class="cert-link" href="certificados/oracle-ai-database-foundations.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle AI Database Certified Foundations Associate">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="level">Foundations Associate</span></div>
+        <h3>Oracle AI Database Certified Foundations Associate</h3>
+        <div class="cert-meta"><span>Oracle University</span><span>set 2026</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/oci-ai-foundations.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle Cloud Infrastructure Certified AI Foundations Associate">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 10h4v4h-4z"/></svg></span><span class="level">Foundations Associate</span></div>
+        <h3>Oracle Cloud Infrastructure Certified AI Foundations Associate</h3>
+        <div class="cert-meta"><span>Oracle University</span><span>set 2026</span><span class="valid">Válido até set 2028</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/oci-foundations.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle Cloud Infrastructure Certified Foundations Associate">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H7a5 5 0 1 1 1.2-9.86A6 6 0 0 1 19.6 11 4 4 0 0 1 17.5 19Z"/></svg></span><span class="level">Foundations Associate</span></div>
+        <h3>Oracle Cloud Infrastructure Certified Foundations Associate</h3>
+        <div class="cert-meta"><span>Oracle University</span><span>set 2026</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/agentic-ai-foundations.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Agentic AI Certified Foundations Associate">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16.5h5"/></svg></span><span class="level">Foundations Associate</span></div>
+        <h3>Agentic AI Certified Foundations Associate</h3>
+        <div class="cert-meta"><span>Oracle University</span><span>set 2026</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/fusion-ai-agent-studio.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle Fusion AI Agent Studio Certified Foundations Associate">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4Z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8Z"/></svg></span><span class="level">Foundations Associate</span></div>
+        <h3>Oracle Fusion AI Agent Studio Certified Foundations Associate</h3>
+        <div class="cert-meta"><span>Oracle University · Rel 1</span><span>set 2026</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/fusion-erp-process-essentials.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle Fusion Cloud Applications ERP Process Essentials Certified">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span><span class="level">Essentials</span></div>
+        <h3>Oracle Fusion Cloud Applications ERP Process Essentials Certified</h3>
+        <div class="cert-meta"><span>Oracle University · Rel 1</span><span>set 2026</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/guided-learning-administrator.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle Guided Learning Administrator Certified Foundations Associate">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span><span class="level">Foundations Associate</span></div>
+        <h3>Oracle Guided Learning Administrator Certified Foundations Associate</h3>
+        <div class="cert-meta"><span>Oracle University · Rel 1</span><span>set 2026</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+      <li class="card cert reveal"><a class="cert-link" href="certificados/oci-foundations-i-curso.pdf" target="_blank" rel="noopener" aria-label="Abrir certificado em PDF: Oracle Cloud Infrastructure Foundations I">
+        <div class="cert-top"><span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 10-10-5-10 5 10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><span class="level course">Curso concluído</span></div>
+        <h3>Oracle Cloud Infrastructure Foundations I</h3>
+        <div class="cert-meta"><span>Oracle Academy</span><span>nov 2025</span><span class="open">Ver certificado <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="container section" id="contato" aria-labelledby="h-contato">
+    <div class="card contact reveal">
+      <div class="contact-text">
+        <p class="kicker">Contato</p>
+        <h2 id="h-contato">Vamos conversar?</h2>
+        <p>Estou aberto a oportunidades de estágio em Dados e em outras áreas de tecnologia. Respondo rápido por e-mail ou LinkedIn.</p>
+      </div>
+      <div class="mail-box">
+        <span class="mail" id="mail">joaojvictorss@gmail.com</span>
+        <div class="mail-actions">
+          <button class="btn primary" type="button" id="copy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span id="copy-label">Copiar e-mail</span>
+          </button>
+          <a class="btn" href="https://www.linkedin.com/in/jo%C3%A3o-victor-silva-dos-santos/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span>João Victor Silva dos Santos © 2026</span>
+    <span>Feito com HTML, CSS e muito SQL</span>
+  </div>
+</footer>
+
+<a class="icon-btn top-btn" id="top" href="#inicio" aria-label="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></a>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GH = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>';
+  // ícone do GitHub em todos os botões "Ver no GitHub" (e corrige os SVGs inline)
+  document.querySelectorAll('.p-foot .btn, .socials a[aria-label="GitHub"]').forEach(function (a) {
+    var label = a.textContent.trim();
+    a.innerHTML = GH + (label ? label : '');
+  });
+
+  // nav: borda ao rolar, link ativo, botão topo
+  var nav = document.getElementById('nav'), top = document.getElementById('top');
+  var links = Array.prototype.slice.call(document.querySelectorAll('.menu a'));
+  var secs = links.map(function (l) { return document.querySelector(l.getAttribute('href')); });
+  function onScroll() {
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 10);
+    top.classList.toggle('show', y > 600);
+    var cur = 0;
+    secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top < 140) cur = i; });
+    links.forEach(function (l, i) { l.classList.toggle('active', i === cur); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // revelar ao rolar (conteúdo fica visível por padrão; anima só ao entrar na tela)
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e, i) {
+        if (e.isIntersecting) { e.target.style.animationDelay = (i % 5) * 70 + 'ms'; e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) io.observe(el);
+    });
+  }
+
+  // texto digitado no hero
+  var words = ['Análise de Dados', 'SQL e Power BI', 'Python e ETL', 'Desenvolvimento Java'];
+  var typed = document.getElementById('typed');
+  if (!reduce) {
+    var w = 0, c = words[0].length, del = true;
+    setTimeout(function tick() {
+      var word = words[w];
+      if (del) { c--; if (c === 0) { del = false; w = (w + 1) % words.length; } }
+      else { c++; if (c === words[w].length) { del = true; typed.textContent = words[w]; return setTimeout(tick, 1800); } }
+      typed.textContent = words[w].slice(0, c);
+      setTimeout(tick, del ? 40 : 75);
+    }, 2200);
+  }
+
+  // janela SQL: digita a consulta e preenche o resultado
+  var code = document.getElementById('code'), rows = document.getElementById('rows'), status = document.getElementById('status');
+  if (!reduce && code) {
+    var full = code.innerHTML;
+    var bars = Array.prototype.slice.call(rows.querySelectorAll('.barcell'));
+    var widths = bars.map(function (b) { return b.style.width; });
+    function run() {
+      var tmp = document.createElement('div'); tmp.innerHTML = full;
+      var text = tmp.textContent, i = 0;
+      bars.forEach(function (b) { b.style.width = '0px'; });
+      rows.style.opacity = '.25'; status.textContent = 'executando…';
+      (function step() {
+        i += 2;
+        if (i >= text.length) {
+          code.innerHTML = full; rows.style.opacity = '1'; rows.style.transition = 'opacity .4s';
+          bars.forEach(function (b, k) { setTimeout(function () { b.style.width = widths[k]; }, 120 * k); });
+          status.textContent = '3 linhas retornadas';
+          return setTimeout(run, 7000);
+        }
+        code.textContent = text.slice(0, i);
+        setTimeout(step, 28);
+      })();
+    }
+    setTimeout(run, 1400);
+  }
+
+  // filtro de projetos
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.project'));
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var f = t.dataset.f;
+      tabs.forEach(function (o) { o.setAttribute('aria-pressed', String(o === t)); });
+      items.forEach(function (it) {
+        var show = f === 'todos' || it.dataset.area === f;
+        it.classList.toggle('hide', !show);
+        it.classList.toggle('wide', show && f === 'todos' && it === items[0]);
+        it.classList.remove('pop'); void it.offsetWidth; if (show) it.classList.add('pop');
+      });
+    });
+  });
+
+  // copiar e-mail
+  var btn = document.getElementById('copy'), lbl = document.getElementById('copy-label');
+  btn.addEventListener('click', function () {
+    var mail = document.getElementById('mail');
+    function fallback() { var r = document.createRange(); r.selectNodeContents(mail); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); lbl.textContent = 'Selecionado, use Ctrl+C'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(mail.textContent).then(function () { lbl.textContent = 'Copiado!'; setTimeout(function () { lbl.textContent = 'Copiar e-mail'; }, 1800); }, fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
